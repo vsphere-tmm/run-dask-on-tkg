@@ -1,0 +1,63 @@
+apiVersion: run.tanzu.vmware.com/v1alpha2
+kind: TanzuKubernetesCluster
+metadata:
+  name: <TKG_CLUSTER_NAME>
+  namespace: <NAMESPACE>
+spec:
+  topology:
+    controlPlane:
+      replicas: 3
+      storageClass: <NON_GPU_WORKER_STORAGECLASS_NAME>
+      tkr:
+        reference:
+          name: v1.20.8---vmware.1-tkg.2
+      vmClass: best-effort-medium
+    nodePools:
+    - name: gpu-worker
+      replicas: <GPU_WORKER_REPLICAS>
+      storageClass: <GPU_WORKER_STORAGECLASS_NAME>
+      tkr:
+        reference:
+          name: v1.20.8---vmware.1-tkg.2
+      vmClass: <GPU_WORKER_VMCLASS_NAME>
+      volumes:
+      - name: containerd
+        mountPath: /var/lib/containerd
+        capacity:
+          storage: 100Gi
+      - name: kubelet
+        mountPath: /var/lib/kubelet
+        capacity:
+          storage: 50Gi
+    - name: scheduler
+      replicas: 1
+      storageClass: <NON_GPU_WORKER_STORAGECLASS_NAME>
+      tkr:
+        reference:
+          name: v1.20.8---vmware.1-tkg.2
+      vmClass: best-effort-2xlarge
+      volumes:
+      - name: containerd
+        mountPath: /var/lib/containerd
+        capacity:
+          storage: 100Gi
+      - name: kubelet
+        mountPath: /var/lib/kubelet
+        capacity:
+          storage: 50Gi
+    - name: jupyter
+      replicas: 1
+      storageClass: <NON_GPU_WORKER_STORAGECLASS_NAME>
+      tkr:
+        reference:
+          name: v1.20.8---vmware.1-tkg.2
+      vmClass: best-effort-2xlarge
+      volumes:
+      - name: containerd
+        mountPath: /var/lib/containerd
+        capacity:
+          storage: 100Gi
+      - name: kubelet
+        mountPath: /var/lib/kubelet
+        capacity:
+          storage: 50Gi
