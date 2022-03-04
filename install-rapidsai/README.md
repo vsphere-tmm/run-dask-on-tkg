@@ -37,3 +37,7 @@ SCHEDULER_MEMORY=8G
 JUPYTER_CPU=3
 
 JUPYTER_MEMORY=8G
+
+if jupyter needs to configure with vGPU, uncomment the following code lines
+#  --set dask.jupyter.nodeSelector."kubernetes\\.io/hostname"=$JUPYTER_NODE_NAME \
+#  --set dask.jupyter.resources.limits."nvidia\\.com/gpu"=1 --set dask.jupyter.resources.requests."nvidia\\.com/gpu"=1
