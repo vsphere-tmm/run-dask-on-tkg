@@ -5,6 +5,7 @@ SUPERVISOR_CLUSTER_ADDRESS=
 #the vSphere user needs to have EDIT or OWNER permission of the namespace created
 
 VSPHERE_USERNAME=
+
 VSPHERE_PASSWORD=
 
 #Namespace created in vSphere
@@ -18,6 +19,7 @@ TKG_CLUSTER_NAME=
 #the name of storage policy assigned to namespace
 
 NON_GPU_WORKER_STORAGECLASS_NAME=
+
 GPU_WORKER_STORAGECLASS_NAME=
 
 #how many GPU worker nodes to create
@@ -31,4 +33,5 @@ GPU_WORKER_VMCLASS_NAME=
 #the value below can be changed to other VM Classes assigned to the namespace
 
 NON_GPU_WORKER_VMCLASS_NAME=best-effort-2xlarge
+
 CONTROLPLANE_VMCLASS_NAME=best-effort-medium
